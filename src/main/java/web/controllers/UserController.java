@@ -1,12 +1,9 @@
 package web.controllers;
 
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import web.models.User;
 import web.services.UserService;
 
@@ -19,38 +16,38 @@ public class UserController {
         this.userService = userService;
     }
 
-    @RequestMapping("/")
+    @GetMapping("/")
     public String getAllUsers(Model model) {
         model.addAttribute("userList", userService.getAllUsers());
         return "users";
     }
 
-    @RequestMapping("/info")
+    @GetMapping("/info")
     public String addUser(Model model) {
         model.addAttribute("newUser", new User());
         return "user-info";
     }
 
-    @RequestMapping("/saveUser")
+    @PostMapping("/saveUser")
     public String saveUser(@ModelAttribute("newUser") User user) {
         userService.saveUser(user);
         return "redirect:/";
     }
 
-    @RequestMapping("/edit")
+    @GetMapping("/edit")
     public String editUser(@RequestParam("id") Long id, Model model) {
         model.addAttribute("userFromDB", userService.getUser(id));
         return "user-edit";
     }
 
-    @RequestMapping("/updateUser")
+    @PatchMapping("/updateUser")
     public String updateUser(@ModelAttribute("userFromDB") User user, @RequestParam("id") Long id) {
         userService.updateUser(user, id);
         return "redirect:/";
     }
 
-    @RequestMapping("/deleteUser")
-    public String delete(@RequestParam("id")Long id) {
+    @DeleteMapping("/deleteUser")
+    public String delete(@RequestParam("id") Long id) {
         userService.deleteUser(id);
         return "redirect:/";
     }

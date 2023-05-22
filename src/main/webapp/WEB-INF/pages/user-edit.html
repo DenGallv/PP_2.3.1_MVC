@@ -8,7 +8,7 @@
 <h2>Update user</h2>
 <br>
 
-<form th:action="@{updateUser}" th:object="${userFromDB}">
+<form th:method="PATCH" th:action="@{updateUser}" th:object="${userFromDB}">
     <label for="id">User id: </label>
     <input type="text" th:field="*{id}" id="id" readonly/>
     <br/>
