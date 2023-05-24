@@ -41,8 +41,8 @@ public class UserController {
     }
 
     @PatchMapping("/updateUser")
-    public String updateUser(@ModelAttribute("userFromDB") User user, @RequestParam("id") Long id) {
-        userService.updateUser(user, id);
+    public String updateUser(@ModelAttribute("userFromDB") User user) {
+        userService.updateUser(user);
         return "redirect:/";
     }
 

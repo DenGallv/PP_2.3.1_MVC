@@ -19,6 +19,7 @@ public class UserService {
     }
 
     public List<User> getAllUsers() {
+
         return userRepository.findAll();
     }
 
@@ -33,8 +34,7 @@ public class UserService {
     }
 
     @Transactional
-    public void updateUser(User updatedUser, Long id) {
-        updatedUser.setId(id);
+    public void updateUser(User updatedUser) {
         userRepository.save(updatedUser);
     }
 
